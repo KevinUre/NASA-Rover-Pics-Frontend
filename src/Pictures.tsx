@@ -26,7 +26,8 @@ const Pictures = function () {
 	const [ pictures, setPictures ] = React.useState<string[]>();
 	const [ rover, setRover ] = React.useState<string>('');
 
-	const handleClick = () => {
+	const handleDateChange = (newValue:any) => {
+		setDate(newValue);
 		getPictures(rover, convertDateFromPickerToApiFormat(date), setPictures);
 	};
 
@@ -52,14 +53,12 @@ const Pictures = function () {
 					<LocalizationProvider dateAdapter={AdapterDateFns}>
 						<DatePicker
 							label="Date"
+							disabled={rover.length === 0}
 							value={date}
-							onChange={(newValue:any) => {
-								setDate(newValue);
-							}}
+							onChange={handleDateChange}
 							renderInput={(params:any) => <TextField {...params} />}
 						/>
 					</LocalizationProvider>
-					<Button variant="contained" style={{ margin: 12 }} onClick={() => handleClick()}>Search</Button>
 				</div>
 			</div>
 			{ pictures && pictures.length === 0 &&
