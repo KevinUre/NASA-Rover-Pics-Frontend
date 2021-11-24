@@ -1,0 +1,15 @@
+services:
+  nasa-rover-pics-frontend:
+    build:
+      context: .
+      dockerfile: DockerFile
+      target: base
+    volumes:
+      - ./src:/usr/src/app/src
+      - ./nodemon.json:/usr/src/app/nodemon.json
+    container_name: nasa-rover-pics-frontend
+    expose:
+      - '3000'
+    ports:
+      - '3000:3000'
+    command: npm start
